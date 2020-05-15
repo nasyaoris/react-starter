@@ -8,24 +8,29 @@ import { routes } from "./routes";
 import { AppContainer } from "./style";
 
 class App extends React.Component {
-  render() {
-    console.log();
-    const pages = routes.map(route => (
-      <Route
-        component={route.component}
-        exact={route.exact}
-        path={route.path}
-      />
-    ));
+    constructor(props) {
+        super(props);
+        this.state = { isHidden: false };
+    }
+    render() {
+        console.log();
+        const pages = routes.map((route) => (
+            <Route
+                key={route.component}
+                component={route.component}
+                exact={route.exact}
+                path={route.path}
+            />
+        ));
 
-    return (
-      <ThemeProvider theme={theme}>
-        <AppContainer>
-          <Switch>{pages}</Switch>
-        </AppContainer>
-      </ThemeProvider>
-    );
-  }
+        return (
+            <ThemeProvider theme={theme}>
+                <AppContainer>
+                    <Switch>{pages}</Switch>
+                </AppContainer>
+            </ThemeProvider>
+        );
+    }
 }
 
 // function mapStateToProps(state) {
@@ -33,14 +38,9 @@ class App extends React.Component {
 // }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  };
+    return {
+        dispatch,
+    };
 }
 
-export default withRouter(
-  connect(
-    null,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(null, mapDispatchToProps)(App));
