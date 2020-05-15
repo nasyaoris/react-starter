@@ -14,14 +14,9 @@ class AddTodoPage extends React.Component {
         };
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         const { getTodo, todos } = this.props;
-        await getTodo();
-
-        this.setState({
-            ...this.state,
-            todos: todos,
-        });
+        getTodo();
     }
 
     changeHandler = (event) => {
@@ -37,12 +32,11 @@ class AddTodoPage extends React.Component {
         };
 
         await postTodo(obj);
-        await getTodo();
+        getTodo();
 
         this.setState({
             title: "",
             description: "",
-            todos: todos,
         });
     };
 
