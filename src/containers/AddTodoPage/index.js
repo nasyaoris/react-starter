@@ -10,6 +10,7 @@ class AddTodoPage extends React.Component {
         this.state = {
             title: "",
             description: "",
+            todos: [],
         };
     }
 
@@ -21,6 +22,7 @@ class AddTodoPage extends React.Component {
     handleSubmit = () => {};
 
     render() {
+        const { todos } = this.state;
         return (
             <AddTodoPageContainer>
                 <div className="title">
@@ -45,6 +47,22 @@ class AddTodoPage extends React.Component {
                         onChange={this.changeHandler}
                         required
                     />
+                </div>
+                <button
+                    className="btn-primary"
+                    onClick={() => this.handleSubmit()}
+                >
+                    Submit
+                </button>
+                <div className="listTodo">
+                    {todos.map((element) => {
+                        return (
+                            <div className="todo">
+                                <h3>{element.title}</h3>
+                                <p>{element.description}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </AddTodoPageContainer>
         );
